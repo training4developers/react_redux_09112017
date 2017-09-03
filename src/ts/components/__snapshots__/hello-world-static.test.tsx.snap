@@ -1,9 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<HelloWorld /> Enzyme Static HTML <HelloWorld /> renders 1`] = `"\\"<h1>Hello World!</h1>\\""`;
+exports[`<HelloWorld /> Enzyme Static HTML <HelloWorld /> renders 1`] = `"\\"<div class=\\\\\\"jumbotron jumbotron-fluid\\\\\\"><div class=\\\\\\"container-fluid\\\\\\"><h1 class=\\\\\\"display-3\\\\\\">Hello World!</h1><p class=\\\\\\"lead\\\\\\">Welcome to React + Redux with TypeScript!</p></div></div>\\""`;
 
 exports[`<HelloWorld /> React Test Renderer Static HTML <HelloWorld /> renders 1`] = `
-<h1>
-  Hello World!
-</h1>
+<div
+  className="jumbotron jumbotron-fluid"
+>
+  <div
+    className="container-fluid"
+  >
+    <h1
+      className="display-3"
+    >
+      Hello World!
+    </h1>
+    <p
+      className="lead"
+    >
+      Welcome to React + Redux with TypeScript!
+    </p>
+  </div>
+</div>
 `;

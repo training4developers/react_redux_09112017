@@ -55,7 +55,7 @@ const webpackConfig = {
       // transpiles global SASS stylesheets
       // loader order is executed right to left
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         exclude: [path.join(__dirname, srcFolder, 'ts')],
         use: [
           'style-loader',
