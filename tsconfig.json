@@ -1,0 +1,14 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "target": "es5",
+        "module": "es2015",
+        "moduleResolution": "node",
+        "lib": [ "es2017", "dom" ],
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "jsx": "react"
+    },
+    "files":[ "src/ts/app.tsx"]
+}

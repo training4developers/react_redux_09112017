@@ -1,0 +1,27 @@
+$header-color: #00f;
+
+body {
+    h1 {
+        color: $header-color;
+    }
+}
+
+
+.example-enter {
+    opacity: .01;
+
+    &.example-enter-active {
+        opacity: 1;
+        transition: opacity 500ms ease-in;
+    }
+}
+
+
+.example-leave {
+    opacity: 1;
+
+    &.example-leave-active {
+        opacity: .01;
+        transition: opacity 300ms ease-in;
+    }
+}

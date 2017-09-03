@@ -1,0 +1,74 @@
+{
+  "cars": [
+    {
+      "id": 1,
+      "make": "Ford",
+      "model": "F150",
+      "color": "blue",
+      "year": 2018,
+      "price": 80
+    },
+    {
+      "id": 2,
+      "make": "Tesla",
+      "model": "S",
+      "year": 2017,
+      "color": "black",
+      "price": "1000"
+    },
+    {
+      "make": "Tesla",
+      "model": "S",
+      "color": "black",
+      "price": 100000,
+      "year": 2017,
+      "id": 3
+    },
+    {
+      "make": "Tesla",
+      "model": "S",
+      "color": "black",
+      "price": 100000,
+      "year": 2017,
+      "id": 4
+    }
+  ],
+  "widgets": [
+    {
+      "id": 1,
+      "name": "Small Red Widget",
+      "description": "A small, red widget.",
+      "color": "red",
+      "size": "small",
+      "quantity": 2,
+      "price": 12.34
+    },
+    {
+      "id": 2,
+      "name": "Medium Blue Widget",
+      "description": "A medium, blue widget.",
+      "color": "blue",
+      "size": "medium",
+      "quantity": 15,
+      "price": 34.12
+    },
+    {
+      "id": 3,
+      "name": "Large Green Widget",
+      "description": "A large, green widget.",
+      "color": "green",
+      "size": "large",
+      "quantity": 30,
+      "price": 23.45
+    },
+    {
+      "id": 4,
+      "name": "Tiny Orange Widget",
+      "description": "A tiny, orange widget.",
+      "color": "orange",
+      "size": "tiny",
+      "quantity": 10,
+      "price": 21.67
+    }
+  ]
+}
