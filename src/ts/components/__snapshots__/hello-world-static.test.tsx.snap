@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HelloWorld /> Enzyme Static HTML <HelloWorld /> renders 1`] = `"\\"<h1>Hello World!</h1>\\""`;
+
+exports[`<HelloWorld /> React Test Renderer Static HTML <HelloWorld /> renders 1`] = `
+<h1>
+  Hello World!
+</h1>
+`;
