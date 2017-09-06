@@ -22,8 +22,15 @@ JavaScript topics will be included as needed into the React & Redux content
 
 - Day 1 - Overview of React, JSX, Props, State, Component Composition
 - Day 2 - Pure Component, Stateless Functions, Life Cycle Functions, Special Attributes
-- Day 3 - React Router, Redux Reducers, Redux Stores, Connecting Redux to React
+- Day 3 - Unit Testing, React Router, Redux Reducers, Redux Stores, Connecting Redux to React
 - Day 4 - Asynchronous Programming, Redux Thunk
+
+## Online Course Portal
+
+Click Here to Login: [Course Login](https://www.t4d.school/login/index.php)
+
+- Username: Email account name without the @ symbol and domain
+- Password: t4dpass (you will be prompted to change it on first login)
 
 ## Links
 
