@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import { ColorItem } from '../models/color-item';
 
+import { ToolHeader } from './tool-header';
+
 interface ColorToolProps {
   colors: ColorItem[];
 }
@@ -48,9 +50,7 @@ export class ColorTool extends React.Component<ColorToolProps, ColorToolState> {
   public render() {
 
     return <div>
-      <header>
-        <h1>Color Tool</h1>
-      </header>
+      <ToolHeader headerText="Color Tool"></ToolHeader>
       <ul>
         {this.state.colors.map((color) => <li key={color.id}>{color.name} - {color.hexCode}</li>)}
       </ul>
