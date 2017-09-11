@@ -7,8 +7,10 @@ interface ColorToolProps {
 }
 
 interface ColorToolState {
+  colors: ColorItem[];
   newColorName: string;
   newColorHexCode: string;
+  [ x: string ]: any;
 }
 
 export class ColorTool extends React.Component<ColorToolProps, ColorToolState> {
@@ -17,16 +19,29 @@ export class ColorTool extends React.Component<ColorToolProps, ColorToolState> {
     super(props);
 
     this.state = {
+      colors: this.props.colors.concat(),
       newColorName: '',
       newColorHexCode: '',
     };
 
-    this.onChange = this.onChange.bind(this);
+    // this.onChange = this.onChange.bind(this);
   }
 
-  public onChange(e: any) {
+  public onChange = (e: { currentTarget: HTMLInputElement }) => {
     this.setState({
       [ e.currentTarget.name ]: e.currentTarget.value,
+    });
+  }
+
+  public onClick = () => {
+    this.setState({
+      colors: this.state.colors.concat({
+        id: Math.max(...this.state.colors.map((color) => color.id)) + 1,
+        name: this.state.newColorName,
+        hexCode: this.state.newColorHexCode,
+      }),
+      newColorName: '',
+      newColorHexCode: '',
     });
   }
 
@@ -37,7 +52,7 @@ export class ColorTool extends React.Component<ColorToolProps, ColorToolState> {
         <h1>Color Tool</h1>
       </header>
       <ul>
-        {this.props.colors.map((color) => <li key={color.id}>{color.name}</li>)}
+        {this.state.colors.map((color) => <li key={color.id}>{color.name} - {color.hexCode}</li>)}
       </ul>
       <form>
         <div>
@@ -50,6 +65,7 @@ export class ColorTool extends React.Component<ColorToolProps, ColorToolState> {
           <input type="color" id="new-color-hex-code-input" name="newColorHexCode"
             value={this.state.newColorHexCode} onChange={this.onChange} />
         </div>
+        <button type="button" onClick={this.onClick}>Add Color</button>
       </form>
     </div>;
   }

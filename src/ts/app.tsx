@@ -5,10 +5,10 @@ import { ColorTool } from './components/color-tool';
 import { ColorItem } from './models/color-item';
 
 const myColors: ColorItem[] = [
-  { id: 1, name: 'red' },
-  { id: 2, name: 'white' },
-  { id: 3, name: 'blue' },
-  { id: 4, name: 'orange' },
+  { id: 1, name: 'red', hexCode: '#ff0000' },
+  { id: 2, name: 'white', hexCode: '#ffffff' },
+  { id: 3, name: 'blue', hexCode: '#0000ff' },
+  { id: 4, name: 'orange', hexCode: '#ffa500' },
 ];
 
 ReactDOM.render(<ColorTool colors={myColors} />,
