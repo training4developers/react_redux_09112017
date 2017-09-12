@@ -30,11 +30,26 @@ export class ColorTool extends React.Component<ColorToolProps, ColorToolState> {
     });
   }
 
+  public deleteColor = (colorId: number) => {
+
+    this.setState({
+      colors: this.state.colors.filter((color) => color.id !== colorId),
+    });
+
+    // const deleteColorIndex = this.state.colors.findIndex((color) => color.id === colorId);
+    // const newColor = this.state.colors.slice(0, deleteColorIndex)
+    //  .concat(this.state.colors.slice(deleteColorIndex+1));
+    // const newColor2 = [
+    //   ...this.state.colors.slice(0, deleteColorIndex),
+    //   ...this.state.colors.slice(deleteColorIndex + 1),
+    // ];
+  }
+
   public render() {
 
     return <div>
       <ToolHeader />
-      <UnorderedList colors={this.state.colors} />
+      <UnorderedList colors={this.state.colors} onDelete={this.deleteColor} />
       <ColorForm onSubmitColor={this.onClick} />
     </div>;
   }
