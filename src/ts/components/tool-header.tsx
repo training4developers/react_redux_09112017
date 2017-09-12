@@ -1,11 +1,19 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
-export const ToolHeader = (props: { headerText: string }) => {
+interface ToolHeaderProps {
+  headerText?: any;
+}
 
-  return <header>
-    <h1>{props.headerText}</h1>
-  </header>;
+export const ToolHeader: React.StatelessComponent<ToolHeaderProps> =
+  (props: ToolHeaderProps) => {
+    return <header>
+      <h1>{props.headerText}</h1>
+    </header>;
+};
 
+ToolHeader.propTypes = {
+  headerText: PropTypes.string.isRequired,
 };
 
 // export class ToolHeader extends

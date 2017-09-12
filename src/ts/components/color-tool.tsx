@@ -3,6 +3,7 @@ import * as React from 'react';
 import { ColorItem } from '../models/color-item';
 
 import { ToolHeader } from './tool-header';
+import { UnorderedList } from './unordered-list';
 import { ColorForm } from './color-form';
 
 interface ColorToolProps {
@@ -32,10 +33,8 @@ export class ColorTool extends React.Component<ColorToolProps, ColorToolState> {
   public render() {
 
     return <div>
-      <ToolHeader headerText="Color Tool"></ToolHeader>
-      <ul>
-        {this.state.colors.map((color) => <li key={color.id}>{color.name} - {color.hexCode}</li>)}
-      </ul>
+      <ToolHeader />
+      <UnorderedList colors={this.state.colors} />
       <ColorForm onSubmitColor={this.onClick} />
     </div>;
   }

@@ -23,6 +23,7 @@
   "devDependencies": {
     "@types/core-js": "0.9.43",
     "@types/jest": "20.0.8",
+    "@types/prop-types": "^15.5.1",
     "@types/react": "16.0.5",
     "@types/react-addons-css-transition-group": "15.0.3",
     "@types/react-addons-transition-group": "15.0.1",
@@ -71,6 +72,7 @@
     "empty": "0.10.1",
     "key-mirror": "1.0.1",
     "null-loader": "0.1.1",
+    "prop-types": "^15.5.10",
     "raw-loader": "0.5.1",
     "react": "15.6.1",
     "react-addons-css-transition-group": "15.6.0",
