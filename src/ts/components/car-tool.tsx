@@ -5,6 +5,7 @@ import { Car } from '../models/car';
 
 import { ToolHeader } from './tool-header';
 import { CarTable } from './car-table';
+import { CarForm } from './car-form';
 
 interface CarToolState {
   cars: Car[];
@@ -56,13 +57,30 @@ export class CarTool extends React.Component<undefined, CarToolState> {
     });
   }
 
-  render() {
+  public formFocusFn: () => void;
+
+  public componentDidMount() {
+    this.formFocusFn();
+  }
+
+  public editRowUnmount = () => {
+    console.log('edit row unmount from car tool');
+    this.formFocusFn();
+  }
+
+  public setFormFocusFn = (fn: () => void) => {
+    this.formFocusFn = fn;
+  }
+
+  public render() {
 
     return <div>
       <ToolHeader headerText="Car Tool" />
       <CarTable cars={this.state.cars} editRowId={this.state.editRowId}
         onEdit={this.onEdit} onDelete={this.onDelete}
-        onSave={this.onSave} onCancel={this.onCancel} />
+        onSave={this.onSave} onCancel={this.onCancel}
+        notifyParentWillUnmount={this.editRowUnmount} />
+      <CarForm setFormFocusFn={this.setFormFocusFn} />
     </div>;
   }
 

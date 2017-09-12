@@ -6,6 +6,7 @@ interface EditCarRowProps {
   car: Car;
   onSave: (car: Car) => void;
   onCancel: () => void;
+  notifyParentWillUnmount?: () => void;
 }
 
 interface EditCarRowState {
@@ -19,6 +20,8 @@ interface EditCarRowState {
 
 export class EditCarRow extends React.Component<EditCarRowProps, EditCarRowState> {
 
+  public makeInput: HTMLInputElement;
+
   constructor(props: EditCarRowProps) {
     super(props);
 
@@ -29,6 +32,18 @@ export class EditCarRow extends React.Component<EditCarRowProps, EditCarRowState
       color: props.car.color,
       price: props.car.price,
     };
+  }
+
+  public componentDidMount() {
+    if (this.makeInput) {
+      this.makeInput.focus();
+    }
+  }
+
+  public componentWillUnmount() {
+    if (this.props.notifyParentWillUnmount) {
+      this.props.notifyParentWillUnmount();
+    }
   }
 
   public onChange = (e: { currentTarget: HTMLInputElement }) => {
@@ -55,7 +70,10 @@ export class EditCarRow extends React.Component<EditCarRowProps, EditCarRowState
   public render() {
 
     return <tr>
-      <td><input type="text" name="make" value={this.state.make} onChange={this.onChange} /></td>
+      <td><input type="text" name="make"
+        value={this.state.make} onChange={this.onChange}
+        ref={ (input) => this.makeInput = input }
+        /></td>
       <td><input type="text" name="model" value={this.state.model} onChange={this.onChange} /></td>
       <td><input type="number" name="year" value={this.state.year} onChange={this.onChange} /></td>
       <td><input type="text" name="color" value={this.state.color} onChange={this.onChange} /></td>

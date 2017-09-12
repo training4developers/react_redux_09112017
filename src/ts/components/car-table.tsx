@@ -11,6 +11,7 @@ interface CarTableProps {
   onEdit: (carId: number) => void;
   onSave: (car: Car) => void;
   onCancel: () => void;
+  notifyParentWillUnmount?: () => void;
   editRowId: number;
 }
 
@@ -30,7 +31,7 @@ export class CarTable extends React.Component<CarTableProps, undefined> {
       </thead>
       <tbody>
         {this.props.cars.map((car) => (car.id === this.props.editRowId)
-          ? <EditCarRow key={car.id} car={car}
+          ? <EditCarRow key={car.id} car={car} notifyParentWillUnmount={this.props.notifyParentWillUnmount}
               onSave={this.props.onSave} onCancel={this.props.onCancel} />
           : <ViewCarRow key={car.id} car={car}
               onEdit={this.props.onEdit} onDelete={this.props.onDelete} />)}
