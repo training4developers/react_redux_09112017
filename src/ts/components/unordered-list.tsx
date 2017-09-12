@@ -13,7 +13,7 @@ export class UnorderedList extends React.Component<UnorderedListProps, undefined
 
   public render() {
     return <ul>
-      {this.props.colors.map((color) => <ListItem key={color.id}
+      {this.props.colors.map((color, index) => <ListItem key={index}
         color={color} onDeleteListItem={this.props.onDelete} />)}
     </ul>;
   }

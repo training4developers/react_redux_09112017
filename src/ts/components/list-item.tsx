@@ -8,24 +8,43 @@ interface ListItemProps {
   onDeleteListItem: (listItemId: number) => void;
 }
 
-export const ListItem: React.StatelessComponent<ListItemProps> =
-  (props: ListItemProps) => {
+interface ListItemState {
+  colorName: string;
+  colorHexCode: string;
+}
 
-  const deleteListItem = () => {
-    props.onDeleteListItem(props.color.id);
-  };
+export class ListItem extends React.Component<ListItemProps, ListItemState> {
 
-  return <li>
-    {props.color.name} - {props.color.hexCode}
-    <button type="button" onClick={deleteListItem}>Delete</button>
-  </li>;
-};
+  constructor(props: ListItemProps) {
+    super(props);
 
-ListItem.propTypes = {
-  color: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    hexCode: PropTypes.string,
-  }).isRequired,
-  onDeleteListItem: PropTypes.func,
-};
+    console.log('li constructor');
+
+    this.state = {
+      colorName: props.color.name,
+      colorHexCode: props.color.hexCode,
+    };
+  }
+
+  public deleteListItem = () => {
+    this.props.onDeleteListItem(this.props.color.id);
+  }
+
+  public render() {
+    console.log('li render');
+    return <li>
+      State: {this.state.colorName} - {this.state.colorHexCode}
+      Props: {this.props.color.name} - {this.props.color.hexCode}
+      <button type="button" onClick={this.deleteListItem}>Delete</button>
+    </li>;
+  }
+}
+
+// ListItem.propTypes = {
+//   color: PropTypes.shape({
+//     id: PropTypes.number,
+//     name: PropTypes.string,
+//     hexCode: PropTypes.string,
+//   }).isRequired,
+//   onDeleteListItem: PropTypes.func,
+// };

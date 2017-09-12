@@ -48,7 +48,7 @@ export class ColorTool extends React.Component<ColorToolProps, ColorToolState> {
   public render() {
 
     return <div>
-      <ToolHeader />
+      <ToolHeader headerText="Color Tool" />
       <UnorderedList colors={this.state.colors} onDelete={this.deleteColor} />
       <ColorForm onSubmitColor={this.onClick} />
     </div>;
