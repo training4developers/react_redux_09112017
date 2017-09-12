@@ -16,9 +16,9 @@ export class ColorForm extends React.Component<ColorFormProps, undefined> {
 
   }
 
-  public componentWillMount() {
+  // public componentWillMount() {
 
-  }
+  // }
 
   public componentDidMount() {
     if (this.newColorNameInput) {
@@ -26,9 +26,9 @@ export class ColorForm extends React.Component<ColorFormProps, undefined> {
     }
   }
 
-  public componentWillUnmount() {
+  // public componentWillUnmount() {
     
-  }
+  // }
 
   public onClick = () => {
 

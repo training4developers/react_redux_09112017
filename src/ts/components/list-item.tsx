@@ -18,7 +18,7 @@ export class ListItem extends React.Component<ListItemProps, ListItemState> {
   constructor(props: ListItemProps) {
     super(props);
 
-    console.log('li constructor');
+    // console.log('li constructor');
 
     this.state = {
       colorName: props.color.name,
@@ -31,7 +31,7 @@ export class ListItem extends React.Component<ListItemProps, ListItemState> {
   }
 
   public render() {
-    console.log('li render');
+    // console.log('li render');
     return <li>
       State: {this.state.colorName} - {this.state.colorHexCode}
       Props: {this.props.color.name} - {this.props.color.hexCode}
