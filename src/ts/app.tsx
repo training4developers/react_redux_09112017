@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+import { createStore, bindActionCreators, Dispatch, Unsubscribe, Store } from 'redux';
+import { connect, Provider } from 'react-redux';
 
 const addActionCreator = (value: number) => ({ type: 'ADD', value });
 const subtractActionCreator = (value: number) => ({ type: 'SUBTRACT', value });
@@ -34,26 +36,6 @@ const calcReducer = (state: AppState = { result: 0 }, action: CalcAction) => {
   }
 };
 
-const createStore = <T extends {}>(reducer: (state: T, action: Action) => T) => {
-
-  let currentState: T;
-  const subscriptions: any[] = [];
-
-  return {
-    getState: () => currentState,
-    dispatch: (action: Action) => {
-
-      currentState = reducer(currentState, action);
-      subscriptions.forEach((fn) => fn());
-
-    },
-    subscribe: (fn: () => void) => {
-      subscriptions.push(fn);
-    },
-  };
-
-};
-
 const appStore = createStore<AppState>(calcReducer);
 
 appStore.subscribe(() => {
@@ -63,30 +45,30 @@ appStore.subscribe(() => {
 
 });
 
-const bindActionCreators = (actionCreators: any, dispatch: (action: Action) => void) => {
-
-  const actionFnNames = Object.keys(actionCreators);
-  const actions: any = {};
-
-  actionFnNames.forEach((actionFnName) => {
-    actions[actionFnName] = (...params: any[]) => {
-      dispatch(actionCreators[actionFnName](...params));
-    };
-  });
-
-  return actions;
-};
-
-const { add, subtract } = bindActionCreators({
-  add: addActionCreator,
-  subtract: subtractActionCreator,
-}, appStore.dispatch);
-
 interface CalcToolProps {
-  onAdd: (n: number) => void;
-  onSubtract: (n: number) => void;
+  onAdd: (n: number) => { type: string; value: number };
+  onSubtract: (n: number) => { type: string; value: number };
   result: number;
 }
+
+// class CalcTool extends React.Component<CalcToolProps, undefined> {
+
+//   public numberInput: HTMLInputElement;
+
+//   public render() {
+//     return <form>
+//       <input type="number" ref={ (input) => this.numberInput = input } defaultValue="0" />
+//       <button type="button" onClick={() => this.props.onAdd(Number(this.numberInput.value))}>
+//         Add</button>
+//       <button type="button" onClick={() => this.props.onSubtract(Number(this.numberInput.value))}>
+//         Subtract</button>
+//       <div>
+//         Result: {this.props.result}
+//       </div>
+//     </form>;
+//   }
+
+// }
 
 const CalcTool: React.StatelessComponent<CalcToolProps> = (props: CalcToolProps) => {
   let numberInput: HTMLInputElement;
@@ -98,15 +80,67 @@ const CalcTool: React.StatelessComponent<CalcToolProps> = (props: CalcToolProps)
       Result: {props.result}
     </div>
   </form>;
-
 };
 
-appStore.subscribe(() => {
+const mapStateToProps = ({ result }: AppState) => ({ result });
 
-  ReactDOM.render(<CalcTool
-    onAdd={add} onSubtract={subtract}
-    result={appStore.getState().result} />, document.querySelector('main'));
+const mapDispatchToProps = (dispatch: Dispatch<AppState>) => bindActionCreators({
+  onAdd: addActionCreator,
+  onSubtract: subtractActionCreator,
+}, dispatch);
 
-});
+// const connect = <S extends {}>(
+//     mapStateToPropsFn: (state: S) => any,
+//     mapDispatchToPropsFn: (dispatch: Dispatch<S>) => any) => {
 
-add(0);
+//   // return (PresentationComponent: any) => {
+//   // return (PresentationComponent: typeof CalcTool) => {
+//   // return (PresentationComponent: any) => {
+//   return (PresentationComponent: any) => {
+
+//     interface ContainerProps {
+//       store: Store<S>;
+//     }
+
+//     return class extends React.Component<ContainerProps, undefined> {
+
+//       public actionProps: any;
+//       public dataProps: any;
+//       public storeUnsubscribe: Unsubscribe;
+
+//       public constructor(props: ContainerProps) {
+//         super(props);
+//         this.actionProps = mapDispatchToPropsFn(props.store.dispatch);
+//       }
+
+//       public componentDidMount() {
+//         this.storeUnsubscribe = this.props.store.subscribe(() => {
+//           this.dataProps = mapStateToPropsFn(this.props.store.getState());
+//           this.forceUpdate();
+//         });
+//       }
+
+//       public componentWillUnmount() {
+//         this.storeUnsubscribe();
+//       }
+
+//       public render() {
+
+//         return <PresentationComponent
+//           {...this.actionProps}
+//           {...this.dataProps}
+//         />;
+
+//       }
+
+//     };
+
+//   };
+
+// };
+
+const CalcToolContainer = connect(mapStateToProps, mapDispatchToProps)(CalcTool);
+
+ReactDOM.render(<Provider store={appStore}>
+  <CalcToolContainer />
+</Provider>, document.querySelector('main'));
