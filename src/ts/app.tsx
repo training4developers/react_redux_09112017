@@ -1,20 +1,30 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 
-// import { ColorTool } from './components/color-tool';
-// import { ColorItem } from './models/color-item';
+const actions = [
+  { type: 'ADD', value: 1 },
+  { type: 'SUBTRACT', value: 2 },
+  { type: 'ADD', value: 3 },
+  { type: 'SUBTRACT', value: 4 },
+  { type: 'ADD', value: 5 },
+];
 
-// const myColors: ColorItem[] = [
-//   { id: 1, name: 'red', hexCode: '#ff0000' },
-//   { id: 2, name: 'white', hexCode: '#ffffff' },
-//   { id: 3, name: 'blue', hexCode: '#0000ff' },
-//   { id: 4, name: 'orange', hexCode: '#ffa500' },
-// ];
+const finalState = actions.reduce((state = { result: 0 }, action) => {
 
-// ReactDOM.render(<ColorTool colors={myColors} />,
-//   document.querySelector('main'));
+  console.log('state: ', state, 'action:', action);
 
-import { CarTool } from './components/car-tool';
+  switch (action.type) {
+    case 'ADD':
+      return Object.assign({}, state, {
+        result: state.result + action.value,
+      });
+    case 'SUBTRACT':
+      return {
+        ...state,
+        result: state.result - action.value,
+      };
+    default:
+      return state;
+  }
 
-ReactDOM.render(<CarTool />,
-  document.querySelector('main'));
+}, { result: 0 });
+
+console.log('final state:', finalState);
