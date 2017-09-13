@@ -2,14 +2,6 @@
 const addActionCreator = (value: number) => ({ type: 'ADD', value });
 const subtractActionCreator = (value: number) => ({ type: 'SUBTRACT', value });
 
-const actions = [
-  addActionCreator(1),
-  subtractActionCreator(2),
-  addActionCreator(3),
-  subtractActionCreator(4),
-  addActionCreator(5),
-];
-
 interface Action {
   type: any;
 }
@@ -68,8 +60,36 @@ appStore.subscribe(() => {
 
 });
 
-appStore.dispatch(addActionCreator(1));
+const bindActionCreators = (actionCreators: any, dispatch: (action: Action) => void) => {
 
-// const finalState = actions.reduce(calcReducer, { result: 0 });
+  const actionFnNames = Object.keys(actionCreators);
+  const actions: any = {};
 
-// console.log('final state:', finalState);
+  actionFnNames.forEach((actionFnName) => {
+    actions[actionFnName] = (...params: any[]) => {
+      dispatch(actionCreators[actionFnName](...params));
+    };
+  });
+
+  return actions;
+};
+
+const { add, subtract } = bindActionCreators({
+  add: addActionCreator,
+  subtract: subtractActionCreator,
+}, appStore.dispatch);
+
+add(1);
+subtract(2);
+add(3);
+subtract(4);
+add(5);
+
+
+// appStore.dispatch(addActionCreator(1));
+// appStore.dispatch(subtractActionCreator(2));
+// appStore.dispatch(addActionCreator(3));
+// appStore.dispatch(subtractActionCreator(4));
+// appStore.dispatch(addActionCreator(5));
+
+
