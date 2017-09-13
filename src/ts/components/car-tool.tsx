@@ -14,6 +14,8 @@ interface CarToolState {
 
 export class CarTool extends React.Component<undefined, CarToolState> {
 
+  public carFormFocus: () => void;
+
   constructor(props: undefined) {
     super(props);
 
@@ -23,53 +25,61 @@ export class CarTool extends React.Component<undefined, CarToolState> {
     };
   }
 
-  public onEdit = (carId: number) => {
+  public edit = (carId: number) => {
     this.setState({
       editRowId: carId,
     });
   }
 
-  public onDelete = (carId: number) => {
+  public delete = (carId: number) => {
 
     this.setState({
       cars: this.state.cars.filter((car) => car.id !== carId),
     });
   }
 
-  public onSave = (carToSave: Car) => {
+  public save = (carToSave: Car) => {
 
-    const carToSaveIndex = this.state.cars.findIndex((car) => car.id === carToSave.id);
+    if (carToSave.id < 1) {
 
-    this.setState({
-      cars: [
-        ...this.state.cars.slice(0, carToSaveIndex),
-        carToSave,
-        ...this.state.cars.slice(carToSaveIndex + 1),
-      ],
-      editRowId: -1,
-    });
+      carToSave.id = Math.max(...this.state.cars.map((c) => c.id)) + 1;
 
+      this.setState({
+        cars: this.state.cars.concat(carToSave),
+      });
+
+    } else {
+
+      const carToSaveIndex = this.state.cars.findIndex((car) => car.id === carToSave.id);
+
+      this.setState({
+        cars: [
+          ...this.state.cars.slice(0, carToSaveIndex),
+          carToSave,
+          ...this.state.cars.slice(carToSaveIndex + 1),
+        ],
+        editRowId: -1,
+      });
+    }
   }
 
-  public onCancel = () => {
+  public cancel = () => {
     this.setState({
       editRowId: -1,
     });
   }
-
-  public formFocusFn: () => void;
 
   public componentDidMount() {
-    this.formFocusFn();
+    this.carFormFocus();
   }
 
   public editRowUnmount = () => {
     console.log('edit row unmount from car tool');
-    this.formFocusFn();
+    this.carFormFocus();
   }
 
-  public setFormFocusFn = (fn: () => void) => {
-    this.formFocusFn = fn;
+  public setCarFormFocusFn = (fn: () => void) => {
+    this.carFormFocus = fn;
   }
 
   public render() {
@@ -77,10 +87,10 @@ export class CarTool extends React.Component<undefined, CarToolState> {
     return <div>
       <ToolHeader headerText="Car Tool" />
       <CarTable cars={this.state.cars} editRowId={this.state.editRowId}
-        onEdit={this.onEdit} onDelete={this.onDelete}
-        onSave={this.onSave} onCancel={this.onCancel}
+        onEdit={this.edit} onDelete={this.delete}
+        onSave={this.save} onCancel={this.cancel}
         notifyParentWillUnmount={this.editRowUnmount} />
-      <CarForm setFormFocusFn={this.setFormFocusFn} />
+      <CarForm onSubmitCar={this.save} setFormFocusFn={this.setCarFormFocusFn} />
     </div>;
   }
 
