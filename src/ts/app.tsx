@@ -1,3 +1,6 @@
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+
 
 const addActionCreator = (value: number) => ({ type: 'ADD', value });
 const subtractActionCreator = (value: number) => ({ type: 'SUBTRACT', value });
@@ -79,17 +82,31 @@ const { add, subtract } = bindActionCreators({
   subtract: subtractActionCreator,
 }, appStore.dispatch);
 
-add(1);
-subtract(2);
-add(3);
-subtract(4);
-add(5);
+interface CalcToolProps {
+  onAdd: (n: number) => void;
+  onSubtract: (n: number) => void;
+  result: number;
+}
 
+const CalcTool: React.StatelessComponent<CalcToolProps> = (props: CalcToolProps) => {
+  let numberInput: HTMLInputElement;
+  return <form>
+    <input type="number" ref={ (input) => numberInput = input } defaultValue="0" />
+    <button type="button" onClick={() => props.onAdd(Number(numberInput.value))}>Add</button>
+    <button type="button" onClick={() => props.onSubtract(Number(numberInput.value))}>Subtract</button>
+    <div>
+      Result: {props.result}
+    </div>
+  </form>;
 
-// appStore.dispatch(addActionCreator(1));
-// appStore.dispatch(subtractActionCreator(2));
-// appStore.dispatch(addActionCreator(3));
-// appStore.dispatch(subtractActionCreator(4));
-// appStore.dispatch(addActionCreator(5));
+};
 
+appStore.subscribe(() => {
 
+  ReactDOM.render(<CalcTool
+    onAdd={add} onSubtract={subtract}
+    result={appStore.getState().result} />, document.querySelector('main'));
+
+});
+
+add(0);
