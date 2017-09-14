@@ -26,11 +26,11 @@ export class ColorForm extends React.Component<ColorFormProps, ColorFormState> {
     };
   }
 
-  public onChange = (e: { currentTarget: HTMLInputElement }) => {
+  public onChange = (e: { target: HTMLInputElement }) => {
     this.setState({
-      [ e.currentTarget.name ]: e.currentTarget.type === 'number'
-        ? Number(e.currentTarget.value)
-        : e.currentTarget.value,
+      [ e.target.name ]: e.target.type === 'number'
+        ? Number(e.target.value)
+        : e.target.value,
     });
   }
 

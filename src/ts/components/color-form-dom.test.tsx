@@ -54,7 +54,7 @@ describe('<ColorForm /> Test Utils Mock DOM', () => {
 
 });
 
-xdescribe('<ColorForm /> Enzyme Mock DOM', () => {
+describe('<ColorForm /> Enzyme Mock DOM', () => {
 
   const newColorNameValue = 'purple';
   const newColorHexCodeValue = '#aabbcc';
@@ -74,22 +74,21 @@ xdescribe('<ColorForm /> Enzyme Mock DOM', () => {
     expect(component.state().name).toBe('');
     expect(component.state().hexCode).toBe('');
 
-    const newColorNameInput = component.find('input');
+    const newColorNameInput = component.find('#new-color-name-input');
     expect(newColorNameInput.prop('value')).toBe('');
 
     newColorNameInput.simulate('change', {
-      target: { value: newColorNameValue, name: '#new-color-name-input' },
-      currentTarget: { value: newColorNameValue }, name: '#new-color-name-input',
+      target: { value: newColorNameValue, name: 'name' },
+      currentTarget: { value: newColorNameValue, name: 'name' },
     });
 
-    const newColorHexCodeInput = component.find('input');
+    const newColorHexCodeInput = component.find('#new-color-hex-code-input');
     expect(newColorHexCodeInput.prop('value')).toBe('');
 
     newColorHexCodeInput.simulate('change', {
-      target: { value: newColorHexCodeValue, name: '#new-color-hex-code-input' },
-      currentTarget: { value: newColorHexCodeValue }, name: '#new-color-hex-code-input',
+      target: { value: newColorHexCodeValue, name: 'hexCode' },
+      currentTarget: { value: newColorHexCodeValue, name: 'hexCode' },
     });
-
 
     expect(component.state().name).toBe(newColorNameValue);
     expect(component.state().hexCode).toBe(newColorHexCodeValue);
