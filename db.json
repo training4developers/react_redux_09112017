@@ -1,4 +1,36 @@
 {
+  "colors": [
+    {
+      "id": 1,
+      "name": "red",
+      "hexCode": "#ff0000"
+    },
+    {
+      "id": 2,
+      "name": "white",
+      "hexCode": "#ffffff"
+    },
+    {
+      "id": 3,
+      "name": "blue",
+      "hexCode": "#0000ff"
+    },
+    {
+      "id": 4,
+      "name": "orange",
+      "hexCode": "#ffa500"
+    },
+    {
+      "id": -1,
+      "name": "purple",
+      "hexCode": "#9143f6"
+    },
+    {
+      "name": "silver",
+      "hexCode": "#e7e7ff",
+      "id": 5
+    }
+  ],
   "cars": [
     {
       "id": 1,

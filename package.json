@@ -88,6 +88,19 @@
     "whatwg-fetch": "2.0.3"
   },
   "jest": {
+    "testEnvironment": "jsdom",
+    "collectCoverageFrom": [
+      "client/**/*.js",
+      "server/**/*.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
     "moduleFileExtensions": [
       "ts",
       "tsx",

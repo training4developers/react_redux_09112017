@@ -8,59 +8,29 @@ import { ColorForm } from './color-form';
 
 interface ColorToolProps {
   colors: ColorItem[];
+  refresh: () => any;
+  add: (color: ColorItem) => any;
 }
 
-interface ColorToolState {
-  colors: ColorItem[];
-  testBox: string;
-}
-
-export class ColorTool extends React.Component<ColorToolProps, ColorToolState> {
-
-  public constructor(props: ColorToolProps) {
-    super(props);
-    this.state = {
-      colors: this.props.colors.concat(),
-      testBox: '',
-    };
-  }
+export class ColorTool extends React.Component<ColorToolProps, undefined> {
 
   public onClick = (colorItem: ColorItem) => {
-    colorItem.id = Math.max(...this.state.colors.map((color) => color.id)) + 1;
-    //this.state.colors.push(colorItem);
-    this.setState({
-      colors: this.state.colors.concat(colorItem),
-    });
+    this.props.add(colorItem);
   }
 
   public deleteColor = (colorId: number) => {
-
-    this.setState({
-      colors: this.state.colors.filter((color) => color.id !== colorId),
-    });
-
-    // const deleteColorIndex = this.state.colors.findIndex((color) => color.id === colorId);
-    // const newColor = this.state.colors.slice(0, deleteColorIndex)
-    //  .concat(this.state.colors.slice(deleteColorIndex+1));
-    // const newColor2 = [
-    //   ...this.state.colors.slice(0, deleteColorIndex),
-    //   ...this.state.colors.slice(deleteColorIndex + 1),
-    // ];
+    console.log('no op');
   }
 
-  public onChange = (e: any) => {
-    this.setState({
-      testBox: e.currentTarget.value,
-    });
+  public componentDidMount() {
+    this.props.refresh();
   }
 
   public render() {
 
     return <div>
       <ToolHeader headerText="Color Tool" />
-      <UnorderedList colors={this.state.colors} onDelete={this.deleteColor} />
-      <input type="text" name="testBox" value={this.state.testBox} onChange={this.onChange} />
-      <span>Color List length: {this.state.colors.length}</span>
+      <UnorderedList colors={this.props.colors} onDelete={this.deleteColor} />
       <ColorForm onSubmitColor={this.onClick} />
     </div>;
   }

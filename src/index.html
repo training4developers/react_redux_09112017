@@ -11,6 +11,159 @@
 
     <body>
         <main class="container"></main>
+        <script>
+
+
+          // fetch('http://localhost:3010/cars')
+          //   .then(res => res.json())
+          //   .then(cars => console.log(cars));
+
+
+
+          // const p1 = new Promise(resolve => setTimeout(() => resolve('a'), 2000));
+          // const p2 = new Promise(resolve => setTimeout(() => resolve('b'), 4000));
+          // const p3 = new Promise(resolve => setTimeout(() => resolve('c'), 6000));
+          // const p4 = new Promise(resolve => setTimeout(() => resolve('d'), 8000));
+
+          // p1.then(results => console.log('promise 1: ', results));
+          // p2.then(results => console.log('promise 2: ', results));
+          // p3.then(results => console.log('promise 3: ', results));
+          // p4.then(results => console.log('promise 4: ', results));
+
+          // Promise.all([p1,p2,p3,p4]).then(results => {
+          //   console.log('all done');
+          //   console.log(results);
+          // });
+
+
+
+          // const youngMan = new Promise(function youngLady(resolve, reject) {
+
+          //   setTimeout(() => {
+          //     resolve('she is madly in love with him!');
+          //   }, 2000);
+
+          // });
+
+          // youngMan.then((result) => {
+          //   console.log('yay she said yes!');
+          //   console.log(result);
+
+
+          //   // return new Promise(resolve => {
+
+          //   //   setTimeout(() => {
+          //   //     resolve('we found a place to get married')
+          //   //   }, 2000);
+
+          //   // });
+
+          // }).then(result => {
+          //   console.log(result);
+          //   console.log('made it here');
+          // }).catch((result) => {
+          //   console.log('sadly she said no, join match.com');
+          //   console.log(result);
+          // });
+
+          // console.log('waiting');
+
+
+          // let first = true;
+
+          // setTimeout(() => {
+
+          //   if (first) {
+          //     console.log('a');
+          //     first = false;
+          //   }
+
+          // }, 1000);
+
+          // setTimeout(() => {
+
+          //   if (first) {
+          //     console.log('b');
+          //     first = false;
+          //   }
+
+
+          // }, 2000);
+
+
+          // let counter = 0;
+
+          // counter++;
+          // setTimeout(() => {
+          //   console.log('a');
+          //   counter--;
+          //   if (counter === 0) {
+          //     allDone();
+          //   }
+          // }, 1000);
+
+          // counter++;
+          // setTimeout(() => {
+          //   console.log('b');
+          //   counter--;
+          //   if (counter === 0) {
+          //     allDone();
+          //   }
+          // }, 500);
+
+          // counter++;
+          // setTimeout(() => {
+          //   console.log('b');
+          //   counter--;
+          //   if (counter === 0) {
+          //     allDone();
+          //   }
+          // }, 3000);
+
+          // function allDone() {
+          //   console.log('all done');
+          // }
+
+
+
+          // const outer = () => {
+          //   let t = 2;
+
+          //   setTimeout(() => {
+          //     t = 4;
+          //   }, 2000);
+
+          //   return () => {
+          //     console.log(t);
+          //   };
+          // }
+
+          // const fn = outer();
+
+          // fn();
+
+          // setTimeout(() => {
+          //   fn();
+          // }, 4000);
+
+          // console.dir(fn);
+
+            // try {
+          //   setTimeout(() => {
+          //     try {
+          //       throw Error('something went wrong');
+          //     } catch(err) {
+          //       console.log('handled by catch in callback');
+          //       console.log(err);
+          //     }
+          //   }, 2000);
+          // } catch(err) {
+          //   console.log('handled by catch');
+          //   console.log(err);
+          // }
+
+
+        </script>
     </body>
 
 </html>

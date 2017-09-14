@@ -6,7 +6,13 @@ interface ColorFormProps {
   onSubmitColor: (colorItem: ColorItem) => void;
 }
 
-export class ColorForm extends React.Component<ColorFormProps, undefined> {
+interface ColorFormState {
+  name: string;
+  hexCode: string;
+  [ x: string ]: any;
+}
+
+export class ColorForm extends React.Component<ColorFormProps, ColorFormState> {
 
   public newColorNameInput: HTMLInputElement;
   public newColorHexCodeInput: HTMLInputElement;
@@ -14,11 +20,19 @@ export class ColorForm extends React.Component<ColorFormProps, undefined> {
   public constructor(props: ColorFormProps) {
     super(props);
 
+    this.state = {
+      name: '',
+      hexCode: '',
+    };
   }
 
-  // public componentWillMount() {
-
-  // }
+  public onChange = (e: { currentTarget: HTMLInputElement }) => {
+    this.setState({
+      [ e.currentTarget.name ]: e.currentTarget.type === 'number'
+        ? Number(e.currentTarget.value)
+        : e.currentTarget.value,
+    });
+  }
 
   public componentDidMount() {
     if (this.newColorNameInput) {
@@ -26,16 +40,12 @@ export class ColorForm extends React.Component<ColorFormProps, undefined> {
     }
   }
 
-  // public componentWillUnmount() {
-    
-  // }
-
   public onClick = () => {
 
     this.props.onSubmitColor({
       id: -1,
-      name: this.newColorNameInput.value,
-      hexCode: this.newColorHexCodeInput.value,
+      name: this.state.name,
+      hexCode: this.state.hexCode,
     });
   }
 
@@ -45,14 +55,13 @@ export class ColorForm extends React.Component<ColorFormProps, undefined> {
       <div>
         <label htmlFor="new-color-name-input">New Color Name:</label>
         <input type="text" id="new-color-name-input" name="name"
-          defaultValue=""
+          value={this.state.name} onChange={this.onChange}
           ref={ (input) => this.newColorNameInput = input } />
       </div>
       <div>
         <label htmlFor="new-color-hex-code-input">New Color HexCode:</label>
         <input type="color" id="new-color-hex-code-input" name="hexCode"
-          defaultValue=""
-          ref={ (input) => this.newColorHexCodeInput = input }/>
+          value={this.state.hexCode} onChange={this.onChange} />
       </div>
       <button type="button" onClick={this.onClick}>Add Color</button>
     </form>;
